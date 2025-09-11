@@ -3,6 +3,94 @@ All enhancements and patches to Cookiecutter Django will be documented in this f
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 2025.09.10
+
+
+### Updated
+
+- Bump traefik from 3.5.1 to 3.5.2 ([#6041](https://github.com/cookiecutter/cookiecutter-django/pull/6041))
+
+## 2025.09.09
+
+
+### Updated
+
+- Bump nginx from 1.17.8 to 1.29.1 ([#6036](https://github.com/cookiecutter/cookiecutter-django/pull/6036))
+
+- Bump amazon/aws-cli image from 2.28.0 to 2.29.0 ([#6031](https://github.com/cookiecutter/cookiecutter-django/pull/6031))
+
+- Update django-allauth to 65.11.2 ([#6030](https://github.com/cookiecutter/cookiecutter-django/pull/6030))
+
+- Update sentry-sdk to 2.37.1 ([#6027](https://github.com/cookiecutter/cookiecutter-django/pull/6027))
+
+- Update whitenoise to 6.10.0 ([#6026](https://github.com/cookiecutter/cookiecutter-django/pull/6026))
+
+- Update django-upgrade pre-commit hook ([#6025](https://github.com/cookiecutter/cookiecutter-django/pull/6025))
+
+## 2025.09.08
+
+
+### Fixed
+
+- Use `--locked` instead of `--frozen` when running `uv sync` ([#6018](https://github.com/cookiecutter/cookiecutter-django/pull/6018))
+
+- Remove mentions of `pip` and `virtualenv` in the `install_python_dependencies.sh` utility script ([#6019](https://github.com/cookiecutter/cookiecutter-django/pull/6019))
+
+### Updated
+
+- Update psycopg to 3.2.10 ([#6023](https://github.com/cookiecutter/cookiecutter-django/pull/6023))
+
+- Update django-cors-headers to 4.8.0 ([#6022](https://github.com/cookiecutter/cookiecutter-django/pull/6022))
+
+## 2025.09.06
+
+
+### Changed
+
+- Migrate to `uv` as package manager for the generated project ([#5434](https://github.com/cookiecutter/cookiecutter-django/pull/5434))
+
+## 2025.09.05
+
+
+### Updated
+
+- Update sentry-sdk to 2.37.0 ([#6015](https://github.com/cookiecutter/cookiecutter-django/pull/6015))
+
+- Upgrade actions/setup-python to v6 in template ([#6012](https://github.com/cookiecutter/cookiecutter-django/pull/6012))
+
+- Update django to 5.1.12 ([#6009](https://github.com/cookiecutter/cookiecutter-django/pull/6009))
+
+- Update ruff to 0.12.12 ([#6013](https://github.com/cookiecutter/cookiecutter-django/pull/6013))
+
+- Update pytest to 8.4.2 ([#6011](https://github.com/cookiecutter/cookiecutter-django/pull/6011))
+
+## 2025.09.04
+
+
+### Updated
+
+- Update django-anymail to 13.1 ([#6007](https://github.com/cookiecutter/cookiecutter-django/pull/6007))
+
+- Update sentry-sdk to 2.36.0 ([#6006](https://github.com/cookiecutter/cookiecutter-django/pull/6006))
+
+## 2025.09.03
+
+
+### Documentation
+
+- Update PythonAnywhere deployment page ([#6003](https://github.com/cookiecutter/cookiecutter-django/pull/6003))
+
+### Updated
+
+- Bump traefik from 3.5.0 to 3.5.1 ([#6004](https://github.com/cookiecutter/cookiecutter-django/pull/6004))
+
+## 2025.09.02
+
+
+### Updated
+
+- Update sentry-sdk to 2.35.2 ([#6002](https://github.com/cookiecutter/cookiecutter-django/pull/6002))
+
 ## 2025.08.31
 
 
