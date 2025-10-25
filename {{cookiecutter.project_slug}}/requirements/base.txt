@@ -1,5 +1,5 @@
 python-slugify==8.0.4  # https://github.com/un33k/python-slugify
-Pillow==11.3.0 # pyup: != 11.2.0  # https://github.com/python-pillow/Pillow
+Pillow==12.0.0 # pyup: != 11.2.0  # https://github.com/python-pillow/Pillow
 {%- if cookiecutter.frontend_pipeline == 'Django Compressor' %}
 {%- if cookiecutter.windows == 'y' and cookiecutter.use_docker == 'n' %}
 rcssmin==1.1.2 --install-option="--without-c-extensions"  # https://github.com/ndparker/rcssmin
@@ -13,7 +13,7 @@ whitenoise==6.11.0  # https://github.com/evansd/whitenoise
 {%- endif %}
 redis==6.4.0  # https://github.com/redis/redis-py
 {%- if cookiecutter.use_docker == "y" or cookiecutter.windows == "n" %}
-hiredis==3.2.1  # https://github.com/redis/hiredis-py
+hiredis==3.3.0  # https://github.com/redis/hiredis-py
 {%- endif %}
 {%- if cookiecutter.use_celery == "y" %}
 celery==5.5.3  # pyup: < 6.0  # https://github.com/celery/celery
@@ -23,16 +23,16 @@ flower==2.0.1  # https://github.com/mher/flower
 {%- endif %}
 {%- endif %}
 {%- if cookiecutter.use_async == 'y' %}
-uvicorn[standard]==0.37.0  # https://github.com/Kludex/uvicorn
+uvicorn[standard]==0.38.0  # https://github.com/Kludex/uvicorn
 uvicorn-worker==0.4.0  # https://github.com/Kludex/uvicorn-worker
 {%- endif %}
 
 # Django
 # ------------------------------------------------------------------------------
-django==5.2.6  # pyup: < 6.0 # https://www.djangoproject.com/
+django==5.2.7  # pyup: < 6.0 # https://www.djangoproject.com/
 django-environ==0.12.0  # https://github.com/joke2k/django-environ
 django-model-utils==5.0.0  # https://github.com/jazzband/django-model-utils
-django-allauth[mfa]==65.11.2  # https://github.com/pennersr/django-allauth
+django-allauth[mfa]==65.12.1  # https://github.com/pennersr/django-allauth
 django-crispy-forms==2.4  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==2025.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 {%- if cookiecutter.frontend_pipeline == 'Django Compressor' %}
