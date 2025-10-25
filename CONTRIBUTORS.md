@@ -1329,6 +1329,13 @@ Listed in alphabetical order.
     <td></td>
   </tr>
   <tr>
+    <td>Josh596</td>
+    <td>
+      <a href="https://github.com/Josh596">Josh596</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
     <td>jugglinmike</td>
     <td>
       <a href="https://github.com/jugglinmike">jugglinmike</a>
@@ -2312,6 +2319,13 @@ Listed in alphabetical order.
     <td>Tom Offermann</td>
     <td>
       <a href="https://github.com/"></a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Tosinibikunle</td>
+    <td>
+      <a href="https://github.com/Tosinibikunle">Tosinibikunle</a>
     </td>
     <td></td>
   </tr>
