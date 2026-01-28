@@ -10,9 +10,9 @@ default:
     @just --list
 
 # build: Build python image.
-build:
+build *args:
     @echo "Building python image..."
-    @docker compose build
+    @docker compose build {{ "{{args}}" }}
 
 # up: Start up containers.
 up:
