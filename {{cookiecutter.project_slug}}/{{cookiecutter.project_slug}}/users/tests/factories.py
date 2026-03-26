@@ -1,5 +1,4 @@
-from collections.abc import Sequence
-from typing import Any
+from __future__ import annotations
 
 from django.contrib.auth import get_user_model
 from factory import Faker
@@ -18,7 +17,7 @@ class UserFactory(DjangoModelFactory[User]):
     last_name = Faker("last_name")
 
     @post_generation
-    def password(self, create: bool, extracted: Sequence[Any], **kwargs):  # noqa: FBT001
+    def password(self: User, create: bool, extracted: str | None, **kwargs):  # noqa: FBT001
         password = (
             extracted
             if extracted
@@ -32,14 +31,10 @@ class UserFactory(DjangoModelFactory[User]):
             ).evaluate(None, None, extra={"locale": None})
         )
         self.set_password(password)
-
-    @classmethod
-    def _after_postgeneration(cls, instance, create, results=None):
-        """Save again the instance if creating and at least one hook ran."""
-        if create and results and not cls._meta.skip_postgeneration_save:
-            # Some post-generation hooks ran, and may have modified us.
-            instance.save()
+        if create:
+            self.save()
 
     class Meta:
         model = get_user_model()
-        django_get_or_create = ["email"]
+        django_get_or_create = ["{{cookiecutter.username_type}}"]
+        skip_postgeneration_save = True

@@ -2,16 +2,16 @@
 
 -r base.txt
 
-gunicorn==24.1.1  # https://github.com/benoitc/gunicorn
-psycopg[c]==3.3.2  # https://github.com/psycopg/psycopg
+gunicorn==25.2.0  # https://github.com/benoitc/gunicorn
+psycopg[c]==3.3.3  # https://github.com/psycopg/psycopg
 {%- if cookiecutter.use_whitenoise == 'n'and cookiecutter.cloud_provider in ('AWS', 'GCP', 'Azure') %}
 Collectfasta==3.3.3  # https://github.com/jasongi/collectfasta
 {%- endif %}
 {%- if cookiecutter.use_sentry == "y" %}
-sentry-sdk==2.50.0  # https://github.com/getsentry/sentry-python
+sentry-sdk==2.56.0  # https://github.com/getsentry/sentry-python
 {%- endif %}
 {%- if cookiecutter.use_docker == "n" and cookiecutter.windows == "y" %}
-hiredis==3.3.0  # https://github.com/redis/hiredis-py
+hiredis==3.3.1  # https://github.com/redis/hiredis-py
 {%- endif %}
 
 # Django
