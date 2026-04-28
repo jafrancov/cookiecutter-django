@@ -4,6 +4,7 @@ import uuid as uuid_lib
 from typing import ClassVar
 
 {% endif -%}
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
@@ -25,7 +26,7 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         default=uuid_lib.uuid4,
-        editable=False
+        editable=False,
     )
     first_name = models.CharField(_("first name"), max_length=150)
     last_name = models.CharField(_("last name"), max_length=150)

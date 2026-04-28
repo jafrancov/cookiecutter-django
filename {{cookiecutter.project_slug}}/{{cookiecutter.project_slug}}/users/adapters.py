@@ -66,7 +66,7 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         try:
             existing_email = EmailAddress.objects.get(
                 email__iexact=verified_email.email,
-                verified=True
+                verified=True,
             )
         except EmailAddress.DoesNotExist:
             return
