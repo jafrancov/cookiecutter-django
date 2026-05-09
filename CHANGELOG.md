@@ -3,6 +3,35 @@ All enhancements and patches to Cookiecutter Django will be documented in this f
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 2026.05.06
+
+
+### Updated
+
+- Update gunicorn to 26.0.0 ([#6541](https://github.com/cookiecutter/cookiecutter-django/pull/6541))
+
+- Bump traefik from v3.6.15 to v3.7.0 ([#6544](https://github.com/cookiecutter/cookiecutter-django/pull/6544))
+
+- Update sentry-sdk to 2.59.0 ([#6538](https://github.com/cookiecutter/cookiecutter-django/pull/6538))
+
+- Auto-update pre-commit hooks ([#6539](https://github.com/cookiecutter/cookiecutter-django/pull/6539))
+
+- Update django to 6.0.5 ([#6542](https://github.com/cookiecutter/cookiecutter-django/pull/6542))
+
+## 2026.05.02
+
+
+### Updated
+
+- Update psycopg to 3.3.4 ([#6536](https://github.com/cookiecutter/cookiecutter-django/pull/6536))
+
+## 2026.04.30
+
+
+### Updated
+
+- Bump traefik from v3.6.14 to v3.6.15 ([#6535](https://github.com/cookiecutter/cookiecutter-django/pull/6535))
+
 ## 2026.04.24
 
 
