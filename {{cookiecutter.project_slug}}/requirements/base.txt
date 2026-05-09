@@ -49,5 +49,5 @@ django-webpack-loader==3.2.3  # https://github.com/django-webpack/django-webpack
 
 # Project
 # ------------------------------------------------------------------------------
-django-import-export==4.4.0 # https://github.com/django-import-export/django-import-export
+django-import-export==4.4.1 # https://github.com/django-import-export/django-import-export
 tablib[all]==3.9.0 # https://github.com/jazzband/tablib
