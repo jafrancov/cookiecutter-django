@@ -2,7 +2,7 @@ import uuid as uuid_lib
 {%- if cookiecutter.username_type == "email" %}
 from typing import ClassVar
 
-{% endif -%}
+{%- endif %}
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 {%- if cookiecutter.username_type == "email" %}
