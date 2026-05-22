@@ -1,5 +1,5 @@
 {% if cookiecutter.frontend_pipeline in ['Gulp', 'Webpack'] -%}
-FROM docker.io/node:24.15-bookworm-slim AS client-builder
+FROM docker.io/node:26.2-bookworm-slim AS client-builder
 
 ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
@@ -64,7 +64,7 @@ ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
 
 RUN addgroup --system django \
-  && adduser --system --ingroup django django
+  && adduser --system --ingroup django --home /home/django django
 
 
 # Install required system dependencies

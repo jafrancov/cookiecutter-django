@@ -916,6 +916,13 @@ Listed in alphabetical order.
     <td>fabaff</td>
   </tr>
   <tr>
+    <td>Fabián Falón</td>
+    <td>
+      <a href="https://github.com/fabianfalon">fabianfalon</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
     <td>farwill</td>
     <td>
       <a href="https://github.com/farwill">farwill</a>
@@ -1031,6 +1038,13 @@ Listed in alphabetical order.
     <td>Glenn Wiskur</td>
     <td>
       <a href="https://github.com/gwiskur">gwiskur</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Gourav T</td>
+    <td>
+      <a href="https://github.com/gourav-sraoss">gourav-sraoss</a>
     </td>
     <td></td>
   </tr>
@@ -1742,6 +1756,13 @@ Listed in alphabetical order.
     <td></td>
   </tr>
   <tr>
+    <td>Matthias Schoettle</td>
+    <td>
+      <a href="https://github.com/mschoettle">mschoettle</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
     <td>Matthias Sieber</td>
     <td>
       <a href="https://github.com/manonthemat">manonthemat</a>
@@ -1759,6 +1780,13 @@ Listed in alphabetical order.
     <td>Meghan Heintz</td>
     <td>
       <a href="https://github.com/dot2dotseurat">dot2dotseurat</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Mehdi YAHIA CHERIF</td>
+    <td>
+      <a href="https://github.com/Mehdi-YC">Mehdi-YC</a>
     </td>
     <td></td>
   </tr>
