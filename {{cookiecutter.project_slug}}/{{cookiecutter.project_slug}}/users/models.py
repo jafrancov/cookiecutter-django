@@ -1,10 +1,13 @@
 import uuid as uuid_lib
 {%- if cookiecutter.username_type == "email" %}
 from typing import ClassVar
-{%- endif %}
 
+{% endif -%}
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+from django.db.models import CharField
+{%- if cookiecutter.username_type == "email" %}
+from django.db.models import EmailField
+{%- endif %}
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 {%- if cookiecutter.username_type == "email" %}
@@ -29,7 +32,7 @@ class User(AbstractUser):
     first_name = models.CharField(_("first name"), max_length=150)
     last_name = models.CharField(_("last name"), max_length=150)
     {%- if cookiecutter.username_type == "email" %}
-    email = models.EmailField(_("email address"), unique=True)
+    email = EmailField(_("email address"), unique=True)
     username = None  # type: ignore[assignment]
 
     USERNAME_FIELD = "email"

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from django.contrib.auth import get_user_model
 from factory import Faker
 from factory import post_generation
 from factory.django import DjangoModelFactory
@@ -35,6 +34,6 @@ class UserFactory(DjangoModelFactory[User]):
             self.save()
 
     class Meta:
-        model = get_user_model()
+        model = User
         django_get_or_create = ["{{cookiecutter.username_type}}"]
         skip_postgeneration_save = True

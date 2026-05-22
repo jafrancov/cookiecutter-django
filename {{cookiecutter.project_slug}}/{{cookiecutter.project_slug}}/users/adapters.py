@@ -15,6 +15,8 @@ if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
     from django.http import HttpRequest
 
+    from {{cookiecutter.project_slug}}.users.models import User
+
 
 class AccountAdapter(DefaultAccountAdapter):
     def is_open_for_signup(self, request: HttpRequest) -> bool:
@@ -28,6 +30,25 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         sociallogin: SocialLogin,
     ) -> bool:
         return getattr(settings, "ACCOUNT_ALLOW_REGISTRATION", True)
+
+    def populate_user(
+        self,
+        request: HttpRequest,
+        sociallogin: SocialLogin,
+        data: dict[str, typing.Any],
+    ) -> User:
+        """
+        Populates user information from social provider info.
+
+        See: https://docs.allauth.org/en/latest/socialaccount/advanced.html#creating-and-populating-user-instances
+        """
+        user = super().populate_user(request, sociallogin, data)
+        if not user.first_name:
+            if first_name := data.get("first_name"):
+                user.first_name = first_name
+            if last_name := data.get("last_name"):
+                user.last_name = f" {last_name}"
+        return user
 
     def pre_social_login(self, request, sociallogin):
         # social account already exists, so this is just a login
