@@ -242,7 +242,7 @@ def test_update_user(client: Client):
     user = UserFactory.create(
         first_name="Old First",
         last_name="Old Last",
-        username="old"
+        username="old",
     )
     client.force_login(user)
 
