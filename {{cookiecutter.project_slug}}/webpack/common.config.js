@@ -6,8 +6,8 @@ module.exports = {
   target: 'web',
   context: path.join(__dirname, '../'),
   entry: {
-    project: './{{cookiecutter.project_slug}}/static/js/project',
-    vendors: './{{cookiecutter.project_slug}}/static/js/vendors',
+    project: path.resolve(__dirname, '../{{cookiecutter.project_slug}}/static/js/project'),
+    vendors: path.resolve(__dirname, '../{{cookiecutter.project_slug}}/static/js/vendors'),
   },
   output: {
     path: path.resolve(
