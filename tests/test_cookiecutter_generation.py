@@ -390,6 +390,9 @@ def test_pycharm_docs_removed(cookies, context, editor, pycharm_docs_exist):
     context.update({"editor": editor})
     result = cookies.bake(extra_context=context)
 
+    assert result.exit_code == 0, result.exception
+    assert result.exception is None
+
     index_rst = result.project_path / "docs" / "index.rst"
     has_pycharm_docs = "pycharm/configuration" in index_rst.read_text()
     assert has_pycharm_docs is pycharm_docs_exist
