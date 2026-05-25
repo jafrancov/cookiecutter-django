@@ -47,7 +47,11 @@ class TestUserUpdateView:
 
         view.request = request
 
-        assert view.get_success_url() == f"/users/{user.uuid}/"
+        {%- if cookiecutter.username_type == "email" %}
+        assert view.get_success_url() == f"/users/{user.pk}/"
+        {%- else %}
+        assert view.get_success_url() == f"/users/{user.username}/"
+        {%- endif %}
 
     def test_get_object(self, user: User, rf: RequestFactory):
         view = UserUpdateView()
@@ -87,7 +91,11 @@ class TestUserRedirectView:
 
         view.request = request
 
-        assert view.get_redirect_url() == f"/users/{user.uuid}/"
+        {%- if cookiecutter.username_type == "email" %}
+        assert view.get_redirect_url() == f"/users/{user.pk}/"
+        {%- else %}
+        assert view.get_redirect_url() == f"/users/{user.username}/"
+        {%- endif %}
 
 
 class TestUserDetailView:
@@ -95,7 +103,11 @@ class TestUserDetailView:
         request = rf.get("/fake-url/")
         request.user = UserFactory.create()
 
-        response = user_detail_view(request, uuid=user.uuid)
+        {%- if cookiecutter.username_type == "email" %}
+        response = user_detail_view(request, pk=user.pk)
+        {%- else %}
+        response = user_detail_view(request, username=user.username)
+        {%- endif %}
 
         assert response.status_code == HTTPStatus.OK
 
@@ -103,7 +115,11 @@ class TestUserDetailView:
         request = rf.get("/fake-url/")
         request.user = AnonymousUser()
 
-        response = user_detail_view(request, uuid=user.uuid)
+        {%- if cookiecutter.username_type == "email" %}
+        response = user_detail_view(request, pk=user.pk)
+        {%- else %}
+        response = user_detail_view(request, username=user.username)
+        {%- endif %}
         login_url = reverse(settings.LOGIN_URL)
 
         assert isinstance(response, HttpResponseRedirect)

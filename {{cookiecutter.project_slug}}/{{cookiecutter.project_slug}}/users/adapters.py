@@ -44,10 +44,9 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         """
         user = super().populate_user(request, sociallogin, data)
         if not user.first_name:
-            if first_name := data.get("first_name"):
-                user.first_name = first_name
-            if last_name := data.get("last_name"):
-                user.last_name = f" {last_name}"
+            user.first_name = data.get("first_name") or data.get("name", "")
+        if not user.last_name:
+            user.last_name = data.get("last_name", "")
         return user
 
     def pre_social_login(self, request, sociallogin):

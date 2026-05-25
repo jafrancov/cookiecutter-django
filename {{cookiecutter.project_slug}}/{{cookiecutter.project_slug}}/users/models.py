@@ -1,8 +1,7 @@
-import uuid as uuid_lib
 {%- if cookiecutter.username_type == "email" %}
 from typing import ClassVar
 
-{%- endif %}
+{% endif -%}
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 {%- if cookiecutter.username_type == "email" %}
@@ -23,14 +22,8 @@ class User(AbstractUser):
     check forms.SignupForm and forms.SocialSignupForms accordingly.
     """
 
-    uuid = models.UUIDField(
-        unique=True,
-        db_index=True,
-        default=uuid_lib.uuid4,
-        editable=False,
-    )
-    first_name = models.CharField(_("first name"), max_length=150)
-    last_name = models.CharField(_("last name"), max_length=150)
+    first_name = CharField(_("first name"), max_length=150)
+    last_name = CharField(_("last name"), max_length=150)
     {%- if cookiecutter.username_type == "email" %}
     email = EmailField(_("email address"), unique=True)
     username = None  # type: ignore[assignment]
@@ -51,13 +44,10 @@ class User(AbstractUser):
             str: URL for user detail.
 
         """
-        return reverse("users:detail", kwargs={"uuid": self.uuid})
-
-    def __str__(self):
         {%- if cookiecutter.username_type == "email" %}
-        return f"{self.first_name} {self.last_name}"
+        return reverse("users:detail", kwargs={"pk": self.id})
         {%- else %}
-        return f"{self.username}"
+        return reverse("users:detail", kwargs={"username": self.username})
         {%- endif %}
 
     def save(self, *args, **kwargs):

@@ -5,7 +5,7 @@
 {% block title %}
   User: {% endraw %}
   {% if cookiecutter.username_type == "email" %}
-    {% raw %}{{ object.first_name }}{% endraw %}
+    {% raw %}{{ object.name }}{% endraw %}
   {% else %}
     {% raw %}{{ object.username }}{% endraw %}
   {% endif %}
@@ -18,14 +18,16 @@
         <h2>
         {% endraw %}
         {% if cookiecutter.username_type == "email" %}
-          {% raw %}{{ object.first_name }}{% endraw %}
+          {% raw %}{{ object.name }}{% endraw %}
         {% else %}
           {% raw %}{{ object.username }}{% endraw %}
         {% endif %}
       </h2>
       {%- if cookiecutter.username_type == "username" %}
       {%- raw %}
-        <p>{{ object.first_name }}</p>
+      {% if object.name %}
+        <p>{{ object.name }}</p>
+      {% endif %}
       {%- endraw %}
       {%- endif %}
     </div>

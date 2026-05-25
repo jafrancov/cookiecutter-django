@@ -36,14 +36,15 @@ class TestUserViewSet:
         response = view.me(request)  # type: ignore[call-arg]
 
         assert response.data == {
-            {%- if cookiecutter.username_type == "username" %}
+            {%- if cookiecutter.username_type == "email" %}
+            "url": f"http://testserver/api/users/{user.pk}/",
+            {%- else %}
             "username": user.username,
+            "url": f"http://testserver/api/users/{user.username}/",
             {%- endif %}
             "email": user.email,
-            "uuid": str(user.uuid),
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "url": f"http://testserver/api/users/{user.uuid}/",
         }
 {%- elif cookiecutter.rest_api == 'Django Ninja' -%}
 from __future__ import annotations
@@ -88,9 +89,10 @@ def test_list_users_as_authenticated_user(client: Client, user: User):
             "email": user.email,
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "uuid": user.uuid,
-            "url": f"/api/users/{user.uuid}/",
-            {%- if cookiecutter.username_type == "username" %}
+            {%- if cookiecutter.username_type == "email" %}
+            "url": f"/api/users/{user.pk}/",
+            {%- else %}
+            "url": f"/api/users/{user.username}/",
             "username": user.username,
             {%- endif %}
         },
@@ -110,8 +112,7 @@ def test_retrieve_current_user(client: Client, user: User):
         "email": user.email,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "uuid": user.uuid,
-        "url": f"/api/users/{user.uuid}/",
+        "url": f"/api/users/{user.pk}/",
     }
 
 
@@ -119,7 +120,7 @@ def test_retrieve_user(client: Client, user: User):
     client.force_login(user)
 
     response = client.get(
-        reverse("api:retrieve_user", kwargs={"uuid": user.uuid}),
+        reverse("api:retrieve_user", kwargs={"pk": user.pk}),
     )
 
     assert response.status_code == HTTPStatus.OK
@@ -127,8 +128,7 @@ def test_retrieve_user(client: Client, user: User):
         "email": user.email,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "uuid": user.uuid,
-        "url": f"/api/users/{user.uuid}/",
+        "url": f"/api/users/{user.pk}/",
     }
 {%- else %}
 
@@ -145,8 +145,7 @@ def test_retrieve_current_user(client: Client, user: User):
         "email": user.email,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "uuid": user.uuid,
-        "url": f"/api/users/{user.uuid}/",
+        "url": f"/api/users/{user.username}/",
         "username": user.username,
     }
 
@@ -155,7 +154,7 @@ def test_retrieve_user(client: Client, user: User):
     client.force_login(user)
 
     response = client.get(
-        reverse("api:retrieve_user", kwargs={"uuid": user.uuid}),
+        reverse("api:retrieve_user", kwargs={"username": user.username}),
     )
 
     assert response.status_code == HTTPStatus.OK
@@ -163,8 +162,7 @@ def test_retrieve_user(client: Client, user: User):
         "email": user.email,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "uuid": user.uuid,
-        "url": f"/api/users/{user.uuid}/",
+        "url": f"/api/users/{user.username}/",
         "username": user.username,
     }
 {%- endif %}
@@ -175,7 +173,11 @@ def test_retrieve_another_user(client: Client, user: User):
     user_2 = UserFactory.create()
 
     response = client.get(
-        reverse("api:retrieve_user", kwargs={"uuid": user_2.uuid}),
+        {%- if cookiecutter.username_type == "email" %}
+        reverse("api:retrieve_user", kwargs={"pk": user_2.pk}),
+        {%- else %}
+        reverse("api:retrieve_user", kwargs={"username": user_2.username}),
+        {%- endif %}
     )
 
     assert response.status_code == HTTPStatus.NOT_FOUND
@@ -183,15 +185,15 @@ def test_retrieve_another_user(client: Client, user: User):
 
 
 def test_update_current_user(client: Client):
-    user = UserFactory.create(first_name="Old", last_name="Old")
+    user = UserFactory.create(first_name="Old First", last_name="Old Last")
     client.force_login(user)
 
     response = client.patch(
         reverse("api:update_current_user"),
         {%- if cookiecutter.username_type == "email" %}
-        data='{"first_name": "New First Name", "last_name": "New Last Name"}',
+        data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '"}',
         {%- else %}
-        data='{"first_name": "New First Name", "last_name": "New Last Name", "username": "old"}',
+        data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '", "username": "' + user.username + '"}',
         {%- endif %}
         content_type="application/json",
     )
@@ -199,11 +201,13 @@ def test_update_current_user(client: Client):
     assert response.status_code == HTTPStatus.OK, response.json()
     assert response.json() == {
         "email": user.email,
-        "first_name": "New First Name",
-        "last_name": "New Last Name",
-        "url": f"/api/users/{user.uuid}/",
-        {%- if cookiecutter.username_type == "username" %}
-        "username": "old",
+        "first_name": "New First",
+        "last_name": "New Last",
+        {%- if cookiecutter.username_type == "email" %}
+        "url": f"/api/users/{user.pk}/",
+        {%- else %}
+        "username": user.username,
+        "url": f"/api/users/{user.username}/",
         {%- endif %}
     }
 
@@ -212,41 +216,41 @@ def test_update_current_user(client: Client):
 
 
 def test_update_user(client: Client):
-    user = UserFactory.create(first_name="Old", last_name="Old")
+    user = UserFactory.create(first_name="Old First", last_name="Old Last")
     client.force_login(user)
 
     response = client.patch(
-        reverse("api:update_user", kwargs={"uuid": user.uuid}),
-        data='{"first_name": "New First Name", "last_name": "New Last Name"}',
+        reverse("api:update_user", kwargs={"pk": user.pk}),
+        data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '"}',
         content_type="application/json",
     )
 
     assert response.status_code == HTTPStatus.OK, response.json()
     assert response.json() == {
         "email": user.email,
-        "first_name": "New First Name",
-        "last_name": "New Last Name"
-        "url": f"/api/users/{user.uuid}/",
+        "first_name": "New First",
+        "last_name": "New Last",
+        "url": f"/api/users/{user.pk}/",
     }
 {%- else %}
 
 
 def test_update_user(client: Client):
-    user = UserFactory.create(first_name="Old", last_name="Old", username="old")
+    user = UserFactory.create(first_name="Old First", last_name="Old Last", username="old")
     client.force_login(user)
 
     response = client.patch(
         reverse("api:update_user", kwargs={"username": "old"}),
-        data='{"first_name": "New First Name", "last_name": "New Last Name", "username": "old"}',
+        data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '", "username": "old"}',
         content_type="application/json",
     )
 
     assert response.status_code == HTTPStatus.OK, response.json()
     assert response.json() == {
         "email": user.email,
-        "first_name": "New First Name",
-        "last_name": "New Last Name"
-        "url": f"/api/users/{user.uuid}/",
+        "first_name": "New First",
+        "last_name": "New Last",
+        "url": "/api/users/old/",
         "username": "old",
     }
 {%- endif %}

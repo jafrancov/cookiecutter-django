@@ -1,5 +1,4 @@
 {% if cookiecutter.rest_api == 'DRF' -%}
-import uuid
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.mixins import ListModelMixin
@@ -16,11 +15,15 @@ from .serializers import UserSerializer
 class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    lookup_field = "uuid"
+    {%- if cookiecutter.username_type == "email" %}
+    lookup_field = "pk"
+    {%- else %}
+    lookup_field = "username"
+    {%- endif %}
 
     def get_queryset(self, *args, **kwargs):
-        assert isinstance(self.request.user.uuid, uuid.UUID)
-        return self.queryset.filter(uuid=self.request.user.uuid)
+        assert isinstance(self.request.user.id, int)
+        return self.queryset.filter(id=self.request.user.id)
 
     @action(detail=False)
     def me(self, request):
@@ -45,7 +48,7 @@ router = Router(tags=["users"])
 
 
 def _get_users_queryset(request) -> QuerySet[User]:
-    return User.objects.filter(uuid=request.user.uuid)
+    return User.objects.filter(pk=request.user.pk)
 
 
 @router.get("/", response=list[UserSchema])
@@ -59,10 +62,10 @@ def retrieve_current_user(request):
     return request.user
 
 
-@router.get("/{uuid}/", response=UserSchema)
-def retrieve_user(request, uuid: uuid):
+@router.get("/{pk}/", response=UserSchema)
+def retrieve_user(request, pk: int):
     users_qs = _get_users_queryset(request)
-    return get_object_or_404(users_qs, uuid=uuid)
+    return get_object_or_404(users_qs, pk=pk)
 {%- else %}
 
 
@@ -81,7 +84,8 @@ def retrieve_user(request, username: str):
 @router.patch("/me/", response=UserSchema)
 def update_current_user(request, data: UpdateUserSchema):
     user = request.user
-    user.name = data.name
+    user.first_name = data.first_name
+    user.last_name = data.last_name
     {%- if cookiecutter.username_type == "username" %}
     user.username = data.username
     {%- endif %}
@@ -90,11 +94,12 @@ def update_current_user(request, data: UpdateUserSchema):
 {%- if cookiecutter.username_type == "email" %}
 
 
-@router.patch("/{uuid}/", response=UserSchema)
-def update_user(request, uuid: uuid, data: UpdateUserSchema):
+@router.patch("/{pk}/", response=UserSchema)
+def update_user(request, pk: int, data: UpdateUserSchema):
     users_qs = _get_users_queryset(request)
-    user = get_object_or_404(users_qs, uuid=uuid)
-    user.name = data.name
+    user = get_object_or_404(users_qs, pk=pk)
+    user.first_name = data.first_name
+    user.last_name = data.last_name
     user.save()
     return user
 {%- else %}
@@ -104,7 +109,8 @@ def update_user(request, uuid: uuid, data: UpdateUserSchema):
 def update_user(request, username: str, data: UpdateUserSchema):
     users_qs = _get_users_queryset(request)
     user = get_object_or_404(users_qs, username=username)
-    user.name = data.name
+    user.first_name = data.first_name
+    user.last_name = data.last_name
     user.username = data.username
     user.save()
     return user

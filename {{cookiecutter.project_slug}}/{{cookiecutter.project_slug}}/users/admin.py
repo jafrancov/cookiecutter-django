@@ -19,7 +19,6 @@ if settings.DJANGO_ADMIN_FORCE_ALLAUTH:
 class UserAdmin(auth_admin.UserAdmin):
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
-    readonly_fields = ("uuid",)
     fieldsets = (
         {%- if cookiecutter.username_type == "email" %}
         (None, {"fields": ("email", "password")}),
@@ -53,7 +52,6 @@ class UserAdmin(auth_admin.UserAdmin):
     search_fields = ["{{cookiecutter.username_type}}", "first_name", "last_name"]
     ordering = ("{{cookiecutter.username_type}}", "first_name", "last_name")
     {%- if cookiecutter.username_type == "email" %}
-    ordering = ["id"]
     add_fieldsets = (
         (
             None,

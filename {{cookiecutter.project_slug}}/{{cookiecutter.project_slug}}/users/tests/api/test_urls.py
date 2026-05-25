@@ -11,11 +11,18 @@ if TYPE_CHECKING:
 
 
 def test_user_detail(user: User):
+    {%- if cookiecutter.username_type == "email" %}
     assert (
-        reverse("api:user-detail", kwargs={"uuid": user.uuid})
-        == f"/api/users/{user.uuid}/"
+        reverse("api:user-detail", kwargs={"pk": user.pk}) == f"/api/users/{user.pk}/"
     )
-    assert resolve(f"/api/users/{user.uuid}/").view_name == "api:user-detail"
+    assert resolve(f"/api/users/{user.pk}/").view_name == "api:user-detail"
+    {%- else %}
+    assert (
+        reverse("api:user-detail", kwargs={"username": user.username})
+        == f"/api/users/{user.username}/"
+    )
+    assert resolve(f"/api/users/{user.username}/").view_name == "api:user-detail"
+    {%- endif %}
 
 
 def test_user_list():
