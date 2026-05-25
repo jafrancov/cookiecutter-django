@@ -193,7 +193,10 @@ def test_update_current_user(client: Client):
         {%- if cookiecutter.username_type == "email" %}
         data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '"}',
         {%- else %}
-        data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '", "username": "' + user.username + '"}',
+        data=(
+            '{"first_name": "New First", '
+            '"last_name": "New Last", '
+            '"email": "' + user.email + '", "username": "' + user.username + '"}'),
         {%- endif %}
         content_type="application/json",
     )
@@ -236,12 +239,19 @@ def test_update_user(client: Client):
 
 
 def test_update_user(client: Client):
-    user = UserFactory.create(first_name="Old First", last_name="Old Last", username="old")
+    user = UserFactory.create(
+        first_name="Old First",
+        last_name="Old Last",
+        username="old"
+    )
     client.force_login(user)
 
     response = client.patch(
         reverse("api:update_user", kwargs={"username": "old"}),
-        data='{"first_name": "New First", "last_name": "New Last", "email": "' + user.email + '", "username": "old"}',
+        data=(
+            '{"first_name": "New First", '
+            '"last_name": "New Last", '
+            '"email": "' + user.email + '", "username": "old"}'),
         content_type="application/json",
     )
 
