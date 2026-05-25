@@ -8,9 +8,9 @@ class UpdateUserSchema(ModelSchema):
     class Meta:
         model = User
         {%- if cookiecutter.username_type == "email" %}
-        fields = ["name"]
+        fields = ["email", "first_name", "last_name"]
         {%- else %}
-        fields = ["username", "name"]
+        fields = ["username", "email", "first_name", "last_name"]
         {%- endif %}
 
 
@@ -20,9 +20,9 @@ class UserSchema(ModelSchema):
     class Meta:
         model = User
         {%- if cookiecutter.username_type == "email" %}
-        fields = ["email", "name"]
+        fields = ["email", "first_name", "last_name"]
         {%- else %}
-        fields = ["username", "email", "name"]
+        fields = ["username", "email", "first_name", "last_name"]
         {%- endif %}
 
     @staticmethod

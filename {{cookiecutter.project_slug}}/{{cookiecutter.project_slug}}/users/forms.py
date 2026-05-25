@@ -1,9 +1,11 @@
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
+from django.forms import CharField
 {%- if cookiecutter.username_type == "email" %}
 from django.forms import EmailField
 {%- endif %}
+from django.forms import TextInput
 from django.utils.translation import gettext_lazy as _
 
 from .models import User
@@ -46,15 +48,15 @@ class UserSignupForm(SignupForm):
     Check UserSocialSignupForm for accounts created from social.
     """
 
-    first_name = forms.CharField(
+    first_name = CharField(
         max_length=150,
         label=_("first name").capitalize(),
-        widget=forms.TextInput(attrs={"placeholder": _("first name").capitalize()}),
+        widget=TextInput(attrs={"placeholder": _("first name").capitalize()}),
     )
-    last_name = forms.CharField(
+    last_name = CharField(
         max_length=150,
         label=_("last name").capitalize(),
-        widget=forms.TextInput(attrs={"placeholder": _("last name").capitalize()}),
+        widget=TextInput(attrs={"placeholder": _("last name").capitalize()}),
     )
 
     def custom_signup(self, request, user):

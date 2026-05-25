@@ -16,6 +16,8 @@ class TestUserManager:
             password="something-r@nd0m!",  # noqa: S106
         )
         assert user.email == "john@example.com"
+        assert user.first_name == "John"
+        assert user.last_name == "Doe"
         assert not user.is_staff
         assert not user.is_superuser
         assert user.check_password("something-r@nd0m!")
@@ -29,6 +31,8 @@ class TestUserManager:
             password="something-r@nd0m!",  # noqa: S106
         )
         assert user.email == "admin@example.com"
+        assert user.first_name == "Admin"
+        assert user.last_name == "User"
         assert user.is_staff
         assert user.is_superuser
         assert user.username is None
