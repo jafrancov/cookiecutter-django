@@ -3,6 +3,64 @@ All enhancements and patches to Cookiecutter Django will be documented in this f
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 2026.06.01
+
+
+### Updated
+
+- Update sentry-sdk to 2.61.1 ([#6602](https://github.com/cookiecutter/cookiecutter-django/pull/6602))
+
+## 2026.05.30
+
+
+### Updated
+
+- Update pyproject-fmt from v2.21.2 to v2.23.0 ([#6601](https://github.com/cookiecutter/cookiecutter-django/pull/6601))
+
+## 2026.05.29
+
+
+### Updated
+
+- Update django-allauth to 65.18.0 ([#6598](https://github.com/cookiecutter/cookiecutter-django/pull/6598))
+
+- Bump concurrently from 9.2.1 to 10.0.0 ([#6597](https://github.com/cookiecutter/cookiecutter-django/pull/6597))
+
+## 2026.05.28
+
+
+### Updated
+
+- Update redis to 8.0.0 ([#6595](https://github.com/cookiecutter/cookiecutter-django/pull/6595))
+
+- Update sentry-sdk to 2.61.0 ([#6594](https://github.com/cookiecutter/cookiecutter-django/pull/6594))
+
+- Update ruff to 0.15.15 ([#6596](https://github.com/cookiecutter/cookiecutter-django/pull/6596))
+
+## 2026.05.27
+
+
+### Fixed
+
+- Fix missing HTML title to allauth manage template ([#6587](https://github.com/cookiecutter/cookiecutter-django/pull/6587))
+
+### Updated
+
+- Update coverage to 7.14.1 ([#6592](https://github.com/cookiecutter/cookiecutter-django/pull/6592))
+
+## 2026.05.26
+
+
+### Updated
+
+- Update mypy to 2.1.0 ([#6591](https://github.com/cookiecutter/cookiecutter-django/pull/6591))
+
+- Update django-stubs to 6.0.5 ([#6590](https://github.com/cookiecutter/cookiecutter-django/pull/6590))
+
+- Bump nginx from 1.31.0 to 1.31.1 ([#6589](https://github.com/cookiecutter/cookiecutter-django/pull/6589))
+
+- Update uvicorn to 0.48.0 ([#6588](https://github.com/cookiecutter/cookiecutter-django/pull/6588))
+
 ## 2026.05.22
 
 
