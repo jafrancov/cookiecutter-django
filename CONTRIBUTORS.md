@@ -1497,6 +1497,13 @@ Listed in alphabetical order.
     <td></td>
   </tr>
   <tr>
+    <td>Kimberly Meechan</td>
+    <td>
+      <a href="https://github.com/K-Meech">K-Meech</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
     <td>krati yadav</td>
     <td>
       <a href="https://github.com/krati5">krati5</a>
@@ -2088,6 +2095,13 @@ Listed in alphabetical order.
     <td>Plurific</td>
     <td>
       <a href="https://github.com/paulschwenn">paulschwenn</a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Priti Yadav</td>
+    <td>
+      <a href="https://github.com/Priti2008">Priti2008</a>
     </td>
     <td></td>
   </tr>
